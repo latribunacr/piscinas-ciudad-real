@@ -1,0 +1,864 @@
+
+<div id="piscinas-cr-wrapper">
+  <style>
+    /* Encapsulado */
+    #piscinas-cr-wrapper * { box-sizing: border-box; }
+    #piscinas-cr { 
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+      background: #0f172a; 
+      color: #e2e8f0; 
+      border-radius: 14px; 
+      padding: 18px;
+      max-width: 1100px; 
+      margin: 24px auto; 
+      box-shadow: 0 10px 30px rgba(2,6,23,.35);
+    }
+    #piscinas-cr .title { 
+      margin: 0 0 12px; 
+      font-size: 20px; 
+      font-weight: 700; 
+      letter-spacing: .2px;
+    }
+    #piscinas-cr .toolbar {
+      display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap;
+    }
+    #piscinas-cr .search {
+      flex: 1 1 280px;
+      display: flex; align-items: center; gap: 10px;
+      background: #111827; border: 1px solid #334155; border-radius: 10px; padding: 8px 10px;
+    }
+    #piscinas-cr .search input {
+      border: none; outline: none; background: transparent; color: #e2e8f0; width: 100%;
+      font-size: 14px;
+    }
+    #piscinas-cr .legend {
+      font-size: 12px; opacity: .8;
+    }
+    #piscinas-cr table {
+      width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 10px;
+    }
+    #piscinas-cr thead th {
+      position: sticky; top: 0; background: #1f2937; z-index: 1;
+      text-align: left; font-weight: 600; font-size: 13px; padding: 10px; border-bottom: 1px solid #334155;
+      cursor: pointer; user-select: none;
+    }
+    #piscinas-cr thead th .sort-ind { margin-left: 6px; opacity: .6; }
+    #piscinas-cr tbody td {
+      padding: 10px; font-size: 14px; border-bottom: 1px solid #1f2937;
+      text-align: left;
+    }
+    #piscinas-cr tbody tr:hover { background: #0b1220; }
+    #piscinas-cr .badge {
+      display: inline-block; padding: 4px 8px; border-radius: 9999px; 
+      background: linear-gradient(90deg, #22d3ee, #818cf8);
+      color: #0f172a; font-weight: 700; font-variant-numeric: tabular-nums;
+    }
+    #piscinas-cr .muted { color: #94a3b8; font-size: 12px; }
+    #piscinas-cr .num { font-variant-numeric: tabular-nums; }
+    #piscinas-cr .chip {
+      display: inline-block; border: 1px solid #334155; color: #cbd5e1; 
+      border-radius: 9999px; padding: 3px 8px; font-size: 12px; margin-left: 6px;
+    }
+    @media (max-width: 640px) {
+      #piscinas-cr .hide-sm { display: none; }
+      #piscinas-cr thead th, #piscinas-cr tbody td { font-size: 13px; padding: 8px; }
+    }
+  </style>
+
+  <div id="piscinas-cr">
+    <h3 class="title">Piscinas por cada 100 habitantes – Provincia de Ciudad Real</h3>
+    <div class="toolbar">
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35m1.6-5.65a7 7 0 11-14 0 7 7 0 0114 0z" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input id="search-municipio" type="text" placeholder="Buscar municipio… (p. ej., Valdepeñas)" aria-label="Buscar municipio">
+      </div>
+      <div class="legend muted">Click en los encabezados para ordenar <span class="chip">asc/desc</span></div>
+    </div>
+
+    <div style="max-height: 560px; overflow:auto; border: 1px solid #334155; border-radius: 10px;">
+      <table aria-label="Tabla de piscinas por cada 100 habitantes" id="tabla-piscinas-cr">
+        <thead>
+          <tr>
+            <th data-key="municipio">Municipio <span class="sort-ind">↕</span></th>
+            <th class="hide-sm" data-key="piscinas">Piscinas sin cubrir <span class="sort-ind">↕</span></th>
+            <th class="hide-sm" data-key="habitantes">Habitantes <span class="sort-ind">↕</span></th>
+            <th data-key="ratio">Piscinas / 100 hab. <span class="sort-ind">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="piscinas-cr-body">
+          
+    <tr>
+        <td class="municipio">Villamayor de Calatrava</td>
+        <td>192</td>
+        <td>619</td>
+        <td><span class="badge">31.02</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Brazatortas</td>
+        <td>266</td>
+        <td>1001</td>
+        <td><span class="badge">26.57</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Fernán Caballero</td>
+        <td>183</td>
+        <td>965</td>
+        <td><span class="badge">18.96</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Argamasilla de Calatrava</td>
+        <td>1001</td>
+        <td>5802</td>
+        <td><span class="badge">17.25</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Hinojosas de Calatrava</td>
+        <td>86</td>
+        <td>508</td>
+        <td><span class="badge">16.93</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Villar del Pozo</td>
+        <td>7</td>
+        <td>47</td>
+        <td><span class="badge">14.89</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Robledo (El)</td>
+        <td>89</td>
+        <td>617</td>
+        <td><span class="badge">14.42</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Valdemanco del Esteras</td>
+        <td>22</td>
+        <td>163</td>
+        <td><span class="badge">13.5</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Picón</td>
+        <td>90</td>
+        <td>690</td>
+        <td><span class="badge">13.04</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Villanueva de San Carlos</td>
+        <td>34</td>
+        <td>272</td>
+        <td><span class="badge">12.5</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Fuenllana</td>
+        <td>23</td>
+        <td>200</td>
+        <td><span class="badge">11.5</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Mestanza</td>
+        <td>75</td>
+        <td>657</td>
+        <td><span class="badge">11.42</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Ruidera</td>
+        <td>69</td>
+        <td>657</td>
+        <td><span class="badge">10.5</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Poblete</td>
+        <td>306</td>
+        <td>2940</td>
+        <td><span class="badge">10.41</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Retuerta del Bullaque</td>
+        <td>87</td>
+        <td>867</td>
+        <td><span class="badge">10.03</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Puerto Lápice</td>
+        <td>86</td>
+        <td>865</td>
+        <td><span class="badge">9.94</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Navalpino</td>
+        <td>19</td>
+        <td>195</td>
+        <td><span class="badge">9.74</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Caracuel de Calatrava</td>
+        <td>13</td>
+        <td>134</td>
+        <td><span class="badge">9.7</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Piedrabuena</td>
+        <td>419</td>
+        <td>4345</td>
+        <td><span class="badge">9.64</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Almodóvar del Campo</td>
+        <td>536</td>
+        <td>5706</td>
+        <td><span class="badge">9.39</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Luciana</td>
+        <td>33</td>
+        <td>360</td>
+        <td><span class="badge">9.17</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Alcolea de Calatrava</td>
+        <td>123</td>
+        <td>1361</td>
+        <td><span class="badge">9.04</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Chillón</td>
+        <td>157</td>
+        <td>1773</td>
+        <td><span class="badge">8.86</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Cañada de Calatrava</td>
+        <td>9</td>
+        <td>103</td>
+        <td><span class="badge">8.74</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Pozuelo de Calatrava</td>
+        <td>327</td>
+        <td>3894</td>
+        <td><span class="badge">8.4</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Carrión de Calatrava</td>
+        <td>271</td>
+        <td>3233</td>
+        <td><span class="badge">8.38</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Ballesteros de Calatrava</td>
+        <td>30</td>
+        <td>361</td>
+        <td><span class="badge">8.31</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Arenas de San Juan</td>
+        <td>85</td>
+        <td>1035</td>
+        <td><span class="badge">8.21</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Argamasilla de Alba</td>
+        <td>561</td>
+        <td>6925</td>
+        <td><span class="badge">8.1</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Labores (Las)</td>
+        <td>44</td>
+        <td>547</td>
+        <td><span class="badge">8.04</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Navas de Estena</td>
+        <td>22</td>
+        <td>282</td>
+        <td><span class="badge">7.8</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Anchuras</td>
+        <td>21</td>
+        <td>274</td>
+        <td><span class="badge">7.66</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Fuencaliente</td>
+        <td>75</td>
+        <td>1001</td>
+        <td><span class="badge">7.49</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Solana del Pino</td>
+        <td>24</td>
+        <td>332</td>
+        <td><span class="badge">7.23</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Malagón</td>
+        <td>558</td>
+        <td>7754</td>
+        <td><span class="badge">7.2</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">San Lorenzo de Calatrava</td>
+        <td>14</td>
+        <td>197</td>
+        <td><span class="badge">7.11</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Fuente el Fresno</td>
+        <td>208</td>
+        <td>3047</td>
+        <td><span class="badge">6.83</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Cabezarrubias del Puerto</td>
+        <td>33</td>
+        <td>488</td>
+        <td><span class="badge">6.76</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Granátula de Calatrava</td>
+        <td>46</td>
+        <td>686</td>
+        <td><span class="badge">6.71</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Torre de Juan Abad</td>
+        <td>63</td>
+        <td>944</td>
+        <td><span class="badge">6.67</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Torralba de Calatrava</td>
+        <td>200</td>
+        <td>3075</td>
+        <td><span class="badge">6.5</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Cabezarados</td>
+        <td>18</td>
+        <td>297</td>
+        <td><span class="badge">6.06</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Alcoba</td>
+        <td>34</td>
+        <td>567</td>
+        <td><span class="badge">6.0</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Arenales de San Gregorio</td>
+        <td>61</td>
+        <td>1049</td>
+        <td><span class="badge">5.82</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Daimiel</td>
+        <td>1013</td>
+        <td>17645</td>
+        <td><span class="badge">5.74</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Puebla de Don Rodrigo</td>
+        <td>65</td>
+        <td>1137</td>
+        <td><span class="badge">5.72</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Villarrubia de los Ojos</td>
+        <td>545</td>
+        <td>9620</td>
+        <td><span class="badge">5.67</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Aldea del Rey</td>
+        <td>88</td>
+        <td>1577</td>
+        <td><span class="badge">5.58</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Cortijos (Los)</td>
+        <td>47</td>
+        <td>847</td>
+        <td><span class="badge">5.55</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Porzuna</td>
+        <td>190</td>
+        <td>3516</td>
+        <td><span class="badge">5.4</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Viso del Marqués</td>
+        <td>112</td>
+        <td>2081</td>
+        <td><span class="badge">5.38</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Membrilla</td>
+        <td>310</td>
+        <td>5839</td>
+        <td><span class="badge">5.31</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Corral de Calatrava</td>
+        <td>59</td>
+        <td>1128</td>
+        <td><span class="badge">5.23</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Alamillo</td>
+        <td>24</td>
+        <td>461</td>
+        <td><span class="badge">5.21</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Alhambra</td>
+        <td>50</td>
+        <td>969</td>
+        <td><span class="badge">5.16</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Almagro</td>
+        <td>460</td>
+        <td>9049</td>
+        <td><span class="badge">5.08</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Bolaños de Calatrava</td>
+        <td>601</td>
+        <td>12067</td>
+        <td><span class="badge">4.98</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Moral de Calatrava</td>
+        <td>254</td>
+        <td>5103</td>
+        <td><span class="badge">4.98</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Valenzuela de Calatrava</td>
+        <td>31</td>
+        <td>653</td>
+        <td><span class="badge">4.75</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Pozuelos de Calatrava (Los)</td>
+        <td>16</td>
+        <td>345</td>
+        <td><span class="badge">4.64</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Miguelturra</td>
+        <td>678</td>
+        <td>15834</td>
+        <td><span class="badge">4.28</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Villanueva de la Fuente</td>
+        <td>80</td>
+        <td>1883</td>
+        <td><span class="badge">4.25</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Agudo</td>
+        <td>66</td>
+        <td>1604</td>
+        <td><span class="badge">4.11</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">nan</td>
+        <td>20081</td>
+        <td>492640</td>
+        <td><span class="badge">4.08</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Villanueva de los Infantes</td>
+        <td>194</td>
+        <td>4785</td>
+        <td><span class="badge">4.05</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Calzada de Calatrava</td>
+        <td>150</td>
+        <td>3727</td>
+        <td><span class="badge">4.02</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">San Carlos del Valle</td>
+        <td>43</td>
+        <td>1071</td>
+        <td><span class="badge">4.01</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Almuradiel</td>
+        <td>30</td>
+        <td>752</td>
+        <td><span class="badge">3.99</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Guadalmez</td>
+        <td>28</td>
+        <td>707</td>
+        <td><span class="badge">3.96</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Horcajo de los Montes</td>
+        <td>31</td>
+        <td>795</td>
+        <td><span class="badge">3.9</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Torrenueva</td>
+        <td>101</td>
+        <td>2669</td>
+        <td><span class="badge">3.78</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Santa Cruz de Mudela</td>
+        <td>145</td>
+        <td>3871</td>
+        <td><span class="badge">3.75</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Valdepeñas</td>
+        <td>1104</td>
+        <td>30617</td>
+        <td><span class="badge">3.61</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Albaladejo</td>
+        <td>35</td>
+        <td>1003</td>
+        <td><span class="badge">3.49</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Castellar de Santiago</td>
+        <td>59</td>
+        <td>1762</td>
+        <td><span class="badge">3.35</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Pedro Muñoz</td>
+        <td>252</td>
+        <td>7567</td>
+        <td><span class="badge">3.33</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Herencia</td>
+        <td>281</td>
+        <td>8459</td>
+        <td><span class="badge">3.32</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Abenójar</td>
+        <td>41</td>
+        <td>1324</td>
+        <td><span class="badge">3.1</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Puebla del Príncipe</td>
+        <td>20</td>
+        <td>647</td>
+        <td><span class="badge">3.09</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Alcázar de San Juan</td>
+        <td>955</td>
+        <td>31382</td>
+        <td><span class="badge">3.04</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Fontanarejo</td>
+        <td>7</td>
+        <td>233</td>
+        <td><span class="badge">3.0</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Ciudad Real</td>
+        <td>2224</td>
+        <td>75909</td>
+        <td><span class="badge">2.93</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Manzanares</td>
+        <td>512</td>
+        <td>17745</td>
+        <td><span class="badge">2.89</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Villahermosa</td>
+        <td>49</td>
+        <td>1709</td>
+        <td><span class="badge">2.87</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Montiel</td>
+        <td>34</td>
+        <td>1197</td>
+        <td><span class="badge">2.84</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Campo de Criptana</td>
+        <td>350</td>
+        <td>12932</td>
+        <td><span class="badge">2.71</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Villarta de San Juan</td>
+        <td>72</td>
+        <td>2698</td>
+        <td><span class="badge">2.67</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Solana (La)</td>
+        <td>405</td>
+        <td>15225</td>
+        <td><span class="badge">2.66</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Almadenejos</td>
+        <td>10</td>
+        <td>393</td>
+        <td><span class="badge">2.54</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Socuéllamos</td>
+        <td>306</td>
+        <td>12157</td>
+        <td><span class="badge">2.52</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Cózar</td>
+        <td>21</td>
+        <td>899</td>
+        <td><span class="badge">2.34</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Almedina</td>
+        <td>11</td>
+        <td>482</td>
+        <td><span class="badge">2.28</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Alcubillas</td>
+        <td>9</td>
+        <td>418</td>
+        <td><span class="badge">2.15</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Villamanrique</td>
+        <td>20</td>
+        <td>1072</td>
+        <td><span class="badge">1.87</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Terrinches</td>
+        <td>10</td>
+        <td>586</td>
+        <td><span class="badge">1.71</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Almadén</td>
+        <td>78</td>
+        <td>4902</td>
+        <td><span class="badge">1.59</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Saceruela</td>
+        <td>8</td>
+        <td>518</td>
+        <td><span class="badge">1.54</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Carrizosa</td>
+        <td>17</td>
+        <td>1106</td>
+        <td><span class="badge">1.54</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Puertollano</td>
+        <td>644</td>
+        <td>45195</td>
+        <td><span class="badge">1.42</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Tomelloso</td>
+        <td>502</td>
+        <td>36523</td>
+        <td><span class="badge">1.37</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Llanos del Caudillo</td>
+        <td>7</td>
+        <td>533</td>
+        <td><span class="badge">1.31</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Arroba de los Montes</td>
+        <td>5</td>
+        <td>406</td>
+        <td><span class="badge">1.23</span></td>
+    </tr>
+    
+    <tr>
+        <td class="municipio">Santa Cruz de los Cáñamos</td>
+        <td>2</td>
+        <td>471</td>
+        <td><span class="badge">0.42</span></td>
+    </tr>
+    
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:10px">Fuente: padrón municipal y registros de piscinas sin cubrir. Cálculo: (piscinas / habitantes) × 100. Orden inicial: mayor a menor ratio.</p>
+  </div>
+
+  <script>
+    (function() {
+      const wrapper = document.getElementById('piscinas-cr');
+      const input = wrapper.querySelector('#search-municipio');
+      const tbody = wrapper.querySelector('#piscinas-cr-body');
+      const headers = wrapper.querySelectorAll('thead th');
+      
+      // Buscador simple por municipio
+      input.addEventListener('input', function() {
+        const q = this.value.trim().toLowerCase();
+        [...tbody.rows].forEach(tr => {
+          const name = tr.querySelector('.municipio').textContent.toLowerCase();
+          tr.style.display = name.includes(q) ? '' : 'none';
+        });
+      });
+
+      // Función de comparación según columna
+      function getValue(tr, key) {
+        if (key === 'municipio') return tr.querySelector('.municipio').textContent.trim().toLowerCase();
+        if (key === 'piscinas') return parseFloat(tr.children[1].textContent) || 0;
+        if (key === 'habitantes') return parseFloat(tr.children[2].textContent) || 0;
+        if (key === 'ratio') return parseFloat(tr.querySelector('.badge').textContent) || 0;
+        return '';
+      }
+
+      let state = { key: 'ratio', asc: false }; // ya viene ordenada desc por ratio
+      headers.forEach(th => {
+        th.addEventListener('click', () => {
+          const key = th.getAttribute('data-key');
+          if (!key) return;
+          const asc = state.key === key ? !state.asc : true;
+          const rows = Array.from(tbody.querySelectorAll('tr')).filter(r => r.style.display !== 'none');
+          rows.sort((a, b) => {
+            const va = getValue(a, key);
+            const vb = getValue(b, key);
+            if (typeof va === 'number' && typeof vb === 'number') return asc ? va - vb : vb - va;
+            return asc ? va.localeCompare(vb) : vb.localeCompare(va);
+          });
+          rows.forEach(r => tbody.appendChild(r));
+          state = { key, asc };
+          // Actualiza indicador visual simple
+          headers.forEach(h => h.querySelector('.sort-ind').textContent = '↕');
+          th.querySelector('.sort-ind').textContent = asc ? '↑' : '↓';
+        });
+      });
+    })();
+  </script>
+</div>
